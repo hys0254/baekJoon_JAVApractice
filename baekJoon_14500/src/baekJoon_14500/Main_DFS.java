@@ -18,48 +18,51 @@ public class Main_DFS {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int temp;
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		maxColumn = Integer.parseInt(st.nextToken());
 		maxRow = Integer.parseInt(st.nextToken());
-		numPaper = new int[maxColumn][maxRow];
-		visitCheck = new int[maxColumn][maxRow];
-		for (int i = 0; i < maxColumn; i++) {
+		maxColumn = Integer.parseInt(st.nextToken());
+		numPaper = new int[maxRow][maxColumn];
+		visitCheck = new int[maxRow][maxColumn];
+		for (int i = 0; i < maxRow; i++) {
 			st = new StringTokenizer(br.readLine());
-			for (int j = 0; j < maxRow; j++) {
+			for (int j = 0; j < maxColumn; j++) {
 				numPaper[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
-		for (int i = 0; i < maxColumn; i++) {
+		for (int i = 0; i < maxRow; i++) {
 
-			for (int j = 0; j < maxRow; j++) {
-				numPaper[i][j] = 0;
+			for (int j = 0; j < maxColumn; j++) {
+				visitCheck[i][j] = 0;
 			}
 		}
-		for (int i = 0; i < maxColumn; i++) {
+		for (int i = 0; i < maxRow; i++) {
 			
-			for (int j = 0; j < maxRow; j++) {
+			for (int j = 0; j < maxColumn; j++) {
 			
 				search(i, j, 0, 1);
 				exceptSearch(i, j);
+				
 			}
 		}
+		System.out.println(max);
 
 	}
 
 	public static void search(int startRow, int startColumn, int temp, int cnt) {
 		int nextRow;
 		int nextColumn;
+		temp += numPaper[startRow][startColumn];
 		
 		for (int i = 0; i < 4; i++) {
 			nextRow = startRow + dir[i][0];
 			nextColumn = startColumn + dir[i][1];
-			if (nextRow > maxRow || nextColumn > maxColumn || nextRow < 0 || nextColumn < 0) {
+			if (nextRow >= maxRow || nextColumn >= maxColumn || nextRow < 0 || nextColumn < 0) {
 				continue;
 			}
+		
 			if((visitCheck[nextRow][nextColumn]==1)) {
 				continue;
 			}
 
-			temp += numPaper[startRow][startColumn];
 			if (cnt == 4) {
 				if (temp > max) {
 					max = temp;
@@ -76,10 +79,11 @@ public class Main_DFS {
 	public static void exceptSearch(int x, int y ) {
 		 int temp = 0;
 		    // 1. คฬ
-		    if(x>=0 && x<maxRow && y>=0 && y+2<maxColumn){
+		    if(x>=0 && x+1<maxRow && y>=0 && y+2<maxColumn){
 		        temp = numPaper[x][y] + numPaper[x][y+1] + numPaper[x][y+2] + numPaper[x+1][y+1];
 		        if (max < temp) {
 					max = temp;
+					
 				}
 		    }
 
@@ -100,7 +104,7 @@ public class Main_DFS {
 		    }
 
 		    // 4. คร
-		    if(x-1 >= 0 && x+1 <=maxRow && y >=0 && y+1 <=maxColumn){
+		    if(x-1 >= 0 && x+1 <maxRow && y >=0 && y+1 <maxColumn){
 		        temp = numPaper[x][y] + numPaper[x][y+1] + numPaper[x-1][y+1] + numPaper[x+1][y+1];
 		        if (max < temp) {
 					max = temp;
