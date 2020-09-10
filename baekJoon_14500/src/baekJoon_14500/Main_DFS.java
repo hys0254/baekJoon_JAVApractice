@@ -35,6 +35,11 @@ public class Main_DFS {
 		
 	}
 	public static void search(int [][] numPaper,int[][] visitCheck,int startRow,int startColumn, int temp,int cnt) {
-		
+		temp += numPaper[startRow][startColumn];
+		visitCheck[startRow][startColumn]=1;
+		if(cnt==4||) {
+			visitCheck[startRow][startColumn]=0;
+			return;
+		}
 	}
 }
