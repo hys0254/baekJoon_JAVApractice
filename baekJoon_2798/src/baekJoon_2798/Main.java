@@ -27,7 +27,6 @@ public class Main {
 							if(j==k||k==i) {continue;}
 							int compare = cardSet[i] + cardSet[j] + cardSet[k];
 							if(compare>maxSum&&compare<=limit) {
-							
 								maxSum=compare;
 							}
 						}
