@@ -3,6 +3,7 @@ package baekJoon_11729;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+
 public class Main {
 	
 	static StringBuilder sb = new StringBuilder();
